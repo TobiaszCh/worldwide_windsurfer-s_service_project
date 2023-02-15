@@ -1,0 +1,13 @@
+package com.project.weatherservice.dto;
+
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
+public class WeatherDto {
+
+    private String name_city;
+    private double temperature;
+    private double speed_wind;
+}
