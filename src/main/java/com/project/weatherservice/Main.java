@@ -1,7 +1,9 @@
 package com.project.weatherservice;
 
-public class Main {
-    public static void main(String[] args) {
+import com.project.weatherservice.client.config.WeatherConfig;
+import com.project.weatherservice.logic.Logic;
+import org.springframework.web.client.RestTemplate;
 
-    }
+public class Main {
+
 }

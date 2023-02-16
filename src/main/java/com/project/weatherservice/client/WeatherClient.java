@@ -1,6 +1,7 @@
 package com.project.weatherservice.client;
 
 import com.project.weatherservice.client.config.WeatherConfig;
+import com.project.weatherservice.client.dto.OpenWeatherDto;
 import com.project.weatherservice.dto.WeatherDto;
 import com.project.weatherservice.client.dto.OpenWeatherMainDto;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +15,15 @@ public class WeatherClient {
 
     private final RestTemplate restTemplate;
     private final WeatherConfig weatherConfig;
-    public WeatherDto getWeather() {
+    public WeatherDto getWeather(String data, String city) {
         OpenWeatherMainDto openWeatherMainDto = restTemplate.getForObject( weatherConfig.getApiEndpoint()+
-                "daily?city=Jastarnia&country=pl&" + weatherConfig.getAppKey(),
+                "daily?" + city + weatherConfig.getAppKey(),
                 OpenWeatherMainDto.class);
-        return WeatherDto.builder().
-                name_city(openWeatherMainDto.getCity_name())
-                .temperature(openWeatherMainDto.getData().get(2).getTemp())
-                .speed_wind(openWeatherMainDto.getData().get(2).getWind_spd())
+        return WeatherDto.builder()
+                .date(data)
+                .name_city(openWeatherMainDto.getCity_name())
+                .temperature(openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data)).mapToDouble(OpenWeatherDto::getTemp).sum())
+                .speed_wind(openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data)).mapToDouble(OpenWeatherDto::getWind_spd).sum())
                 .build();
     }
 
