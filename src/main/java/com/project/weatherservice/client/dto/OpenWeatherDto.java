@@ -8,4 +8,6 @@ public class OpenWeatherDto {
     private double wind_spd;
     private String datetime;
 
+
+
 }

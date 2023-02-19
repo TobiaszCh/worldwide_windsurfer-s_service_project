@@ -3,22 +3,19 @@ package com.project.weatherservice.logic;
 import com.project.weatherservice.client.config.WeatherConfig;
 import com.project.weatherservice.client.dto.OpenWeatherDto;
 import com.project.weatherservice.client.dto.OpenWeatherMainDto;
-import com.project.weatherservice.dto.WeatherDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class Logic {
+public class ChoicePlaceLogic {
     private static final double SPEED_WIND_MAX = 18;
     private static final double SPEED_WIND_MIN = 5;
     private static final double TEMPERATURE_MAX = 35;
