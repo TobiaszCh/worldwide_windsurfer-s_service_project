@@ -14,7 +14,4 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("This response no exist. Change date :)", HttpStatus.BAD_REQUEST);
 
     }
-
-
-
 }

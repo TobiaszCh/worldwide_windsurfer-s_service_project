@@ -1,4 +1,4 @@
-package com.project.weatherservice.dto;
+package com.project.weatherservice.client.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package com.project.weatherservice.client;
 
 import com.project.weatherservice.client.config.WeatherConfig;
 import com.project.weatherservice.client.dto.OpenWeatherDto;
-import com.project.weatherservice.dto.WeatherDto;
+import com.project.weatherservice.client.dto.WeatherDto;
 import com.project.weatherservice.client.dto.OpenWeatherMainDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @RequiredArgsConstructor
 public class WeatherClient {
-
     private final RestTemplate restTemplate;
     private final WeatherConfig weatherConfig;
     public WeatherDto getWeather(String data, String city) {
@@ -26,6 +25,4 @@ public class WeatherClient {
                 .speed_wind(openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data)).mapToDouble(OpenWeatherDto::getWind_spd).sum())
                 .build();
     }
-
-
 }

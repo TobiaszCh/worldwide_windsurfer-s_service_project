@@ -1,4 +1,5 @@
 package com.project.weatherservice.client.config;
+
 import org.springframework.stereotype.Component;
 @Component
 public class Decryptor {
