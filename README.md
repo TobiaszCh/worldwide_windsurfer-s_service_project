@@ -1,0 +1,1 @@
+This app selects the ideal surfing location from a list of five pre-defined options, retrieves weather forecasts using an API provided by https://www.weatherbit.io/api/weather-forecast-16-day, and returns responses and errors in JSON format. It was built using Spring Boot, JUnit 5.7.0, and Mockito.
