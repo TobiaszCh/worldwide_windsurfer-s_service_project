@@ -19,7 +19,7 @@ class ControllerTestSuite {
         //Given
         String data1 = LocalDate.now().toString();
         String data2 = LocalDate.now().plusDays(10).toString();
-        String data3 = LocalDate.now().plusDays(14).toString();;
+        String data3 = LocalDate.now().plusDays(15).toString();;
         //When
         ResponseEntity<WeatherDto> result1 = controller.getWeather(data1);
         ResponseEntity<WeatherDto> result2 = controller.getWeather(data2);

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -25,7 +28,7 @@ class WeatherServiceTest {
     @Test
     public void testWeatherServiceIsValid() {
         //Given
-        String data = "2023-03-01";
+        String data = LocalDate.now().plusDays(6).toString();
         String logic = "best-place";
         WeatherDto expectedWeather = WeatherDto.builder().build();
         when(checkDate.isWithinForecastRange(data)).thenReturn(true);
@@ -39,7 +42,7 @@ class WeatherServiceTest {
     @Test
     public void testWeatherServiceIsInvalid() {
         //Given
-        String data = "2023-05-01";
+        String data = LocalDate.now().plusDays(60).toString();
         String logic = "best-place";
         when(checkDate.isWithinForecastRange(data)).thenReturn(false);
         //When

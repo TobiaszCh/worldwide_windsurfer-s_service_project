@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.project.weatherservice.controller.AllNotFoundException;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +29,7 @@ class ChoicePlaceLogicTestSuite {
     @Test
     void testTheBestChoicePlace() {
         //Given
-        String data = "2023-02-22";
+        String data = LocalDate.now().toString();
         String city = "Warsaw";
         double temp = 25.0;
         double wind = 10.0;
@@ -44,7 +46,7 @@ class ChoicePlaceLogicTestSuite {
     @Test
     void testTheBestChoicePlaceThrowsAllNotFoundException() {
         //Given
-        String data = "2023-02-22";
+        String data = LocalDate.now().toString();
         when(locationCities.listOfCities()).thenReturn(Collections.emptyList());
         //When && Then
         assertThrows(AllNotFoundException.class, () -> choicePlace.theBestChoicePlace(data));
@@ -53,7 +55,7 @@ class ChoicePlaceLogicTestSuite {
     @Test
     void testTheBestCities() {
         //Given
-        String data = "2023-02-22";
+        String data = LocalDate.now().toString();
         String city1 = "Warsaw";
         double temp1 = 25.0;
         double wind1 = 10.0;
@@ -77,7 +79,7 @@ class ChoicePlaceLogicTestSuite {
     @Test
     void testTheBestCitiesEmptyList() {
         //Given
-        String data = "2023-02-22";
+        String data = LocalDate.now().toString();
         String city = "Warsaw";
         double temp = 2.0;
         double wind = 2.0;
