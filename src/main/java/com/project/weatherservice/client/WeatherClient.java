@@ -25,7 +25,7 @@ public class WeatherClient {
     }
     public OpenWeatherMainDto getWeatherApi(String city) {
         return restTemplate.getForObject(weatherConfig.getApiEndpoint() +
-                        "daily?" + "city=Bridgetown&country=Barbados&" + weatherConfig.getAppKey(),
+                        "daily?" + city + weatherConfig.getAppKey(),
                 OpenWeatherMainDto.class);
     }
 }
