@@ -3,6 +3,9 @@ package com.project.weatherservice.client.dto;
 import lombok.*;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OpenWeatherDto {
 
     private double temp;

@@ -15,14 +15,17 @@ public class WeatherClient {
     private final RestTemplate restTemplate;
     private final WeatherConfig weatherConfig;
     public WeatherDto getWeather(String data, String city) {
-        OpenWeatherMainDto openWeatherMainDto = restTemplate.getForObject( weatherConfig.getApiEndpoint()+
-                "daily?" + city + weatherConfig.getAppKey(),
-                OpenWeatherMainDto.class);
+        OpenWeatherMainDto openWeatherMainDto = getWeatherApi(city);
         return WeatherDto.builder()
                 .date(data)
                 .name_city(openWeatherMainDto.getCity_name())
                 .temperature(openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data)).mapToDouble(OpenWeatherDto::getTemp).sum())
                 .speed_wind(openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data)).mapToDouble(OpenWeatherDto::getWind_spd).sum())
                 .build();
+    }
+    public OpenWeatherMainDto getWeatherApi(String city) {
+        return restTemplate.getForObject(weatherConfig.getApiEndpoint() +
+                        "daily?" + city + weatherConfig.getAppKey(),
+                OpenWeatherMainDto.class);
     }
 }

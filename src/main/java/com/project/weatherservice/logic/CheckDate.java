@@ -2,7 +2,6 @@ package com.project.weatherservice.logic;
 
 import com.project.weatherservice.controller.AllNotFoundException;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 @Component
