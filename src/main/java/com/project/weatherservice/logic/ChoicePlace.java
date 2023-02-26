@@ -40,15 +40,21 @@ public class ChoicePlace {
         List<String> cities = locationCities.listOfCities();
         for (String city : cities) {
             OpenWeatherMainDto openWeatherMainDto = weatherClient.getWeatherApi(city);
-            double temperature = openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data))
-                    .mapToDouble(OpenWeatherDto::getTemp).sum();
-            double speedWind = openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data))
-                    .mapToDouble(OpenWeatherDto::getWind_spd).sum();
-            if (temperature > TEMPERATURE_MIN && temperature < TEMPERATURE_MAX && speedWind > SPEED_WIND_MIN && speedWind < SPEED_WIND_MAX) {
-                theBestCities.add((new WeatherLogic(city, 3 * speedWind + temperature)));
+            if(baseAboutConditions(openWeatherMainDto, city, data) != null) {
+                theBestCities.add(baseAboutConditions(openWeatherMainDto, city, data));
             }
-
         }
         return theBestCities;
+    }
+    public WeatherLogic baseAboutConditions(OpenWeatherMainDto openWeatherMainDto, String city, String data) {
+        double temperature = openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data))
+                .mapToDouble(OpenWeatherDto::getTemp).sum();
+        double speedWind = openWeatherMainDto.getData().stream().filter(c -> c.getDatetime().equals(data))
+                .mapToDouble(OpenWeatherDto::getWind_spd).sum();
+        WeatherLogic weatherLogic = null;
+        if (temperature > TEMPERATURE_MIN && temperature < TEMPERATURE_MAX && speedWind > SPEED_WIND_MIN && speedWind < SPEED_WIND_MAX) {
+            weatherLogic = new WeatherLogic(city, 3 * speedWind + temperature);
+        }
+        return weatherLogic;
     }
 }

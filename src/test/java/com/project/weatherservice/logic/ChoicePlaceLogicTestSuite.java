@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.project.weatherservice.controller.AllNotFoundException;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
