@@ -1,4 +1,4 @@
-package com.project.weatherservice.logic;
+package com.project.weatherservice.service.WeatherLogic;
 
 import com.project.weatherservice.client.WeatherClient;
 import com.project.weatherservice.client.dto.OpenWeatherDto;

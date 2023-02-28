@@ -1,5 +1,6 @@
 package com.project.weatherservice.logic;
 
+import com.project.weatherservice.service.WeatherLogic.CheckDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

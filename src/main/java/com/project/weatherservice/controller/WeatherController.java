@@ -1,7 +1,7 @@
 package com.project.weatherservice.controller;
 
 import com.project.weatherservice.client.dto.WeatherDto;
-import com.project.weatherservice.logic.ChoicePlace;
+import com.project.weatherservice.service.WeatherLogic.ChoicePlace;
 import com.project.weatherservice.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/weather")
 @RequiredArgsConstructor
-public class Controller {
+public class WeatherController {
 
    private final WeatherService weatherService;
    private final ChoicePlace choicePlace;

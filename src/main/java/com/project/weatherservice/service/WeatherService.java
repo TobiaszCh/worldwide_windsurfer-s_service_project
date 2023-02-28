@@ -3,7 +3,7 @@ package com.project.weatherservice.service;
 import com.project.weatherservice.client.WeatherClient;
 import com.project.weatherservice.controller.AllNotFoundException;
 import com.project.weatherservice.client.dto.WeatherDto;
-import com.project.weatherservice.logic.CheckDate;
+import com.project.weatherservice.service.WeatherLogic.CheckDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

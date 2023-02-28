@@ -1,15 +1,13 @@
 package com.project.weatherservice.service;
-
 import com.project.weatherservice.client.WeatherClient;
 import com.project.weatherservice.controller.AllNotFoundException;
 import com.project.weatherservice.client.dto.WeatherDto;
-import com.project.weatherservice.logic.CheckDate;
+import com.project.weatherservice.service.WeatherLogic.CheckDate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

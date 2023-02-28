@@ -1,4 +1,4 @@
-package com.project.weatherservice.logic;
+package com.project.weatherservice.service.WeatherLogic;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

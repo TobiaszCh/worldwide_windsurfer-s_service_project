@@ -1,4 +1,4 @@
-package com.project.weatherservice.logic;
+package com.project.weatherservice.service.WeatherLogic;
 
 import com.project.weatherservice.controller.AllNotFoundException;
 import org.springframework.stereotype.Component;

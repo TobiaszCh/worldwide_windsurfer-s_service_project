@@ -1,43 +1,76 @@
 package com.project.weatherservice.controller;
 
 import com.project.weatherservice.client.dto.WeatherDto;
+import com.project.weatherservice.service.WeatherLogic.ChoicePlace;
+import com.project.weatherservice.service.WeatherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import java.time.LocalDate;
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+import java.time.LocalDate;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringJUnitConfig
+@WebMvcTest(WeatherController.class)
 class ControllerTestSuite {
+
     @Autowired
-    private Controller controller;
+    private MockMvc mockMvc;
+
+    @MockBean
+    private WeatherService weatherService;
+
+    @MockBean
+    private ChoicePlace choicePlace;
+
 
     @Test
-    void getWeatherIsValid() {
+    void getWeatherIsValid() throws Exception {
         //Given
-        String data1 = LocalDate.now().toString();
-        String data2 = LocalDate.now().plusDays(10).toString();
-        String data3 = LocalDate.now().plusDays(15).toString();;
-        //When
-        ResponseEntity<WeatherDto> result1 = controller.getWeather(data1);
-        ResponseEntity<WeatherDto> result2 = controller.getWeather(data2);
-        ResponseEntity<WeatherDto> result3 = controller.getWeather(data3);
-        //Then
-        assertEquals(HttpStatus.OK, result1.getStatusCode());
-        assertEquals(HttpStatus.OK, result2.getStatusCode());
-        assertEquals(HttpStatus.OK, result3.getStatusCode());
+        String place = "city=Jastarnia&country=pl&";
+        String date = LocalDate.now().plusDays(2).toString();
+        WeatherDto weatherDto = WeatherDto.builder()
+                .date(date)
+                .name_city("Warszawa")
+                .speed_wind(30)
+                .temperature(15)
+                .build();
+        when(choicePlace.theBestChoicePlace(date)).thenReturn(place);
+        when(weatherService.getAll(date, place))
+                .thenReturn(weatherDto);
+
+        //When && Then
+        mockMvc.perform(get("/weather/" + date)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+
     }
 
     @Test
-    void getWeatherIsInvalid() {
-        String data1 = LocalDate.now().minusDays(1).toString();
-        String data2 = LocalDate.now().plusDays(30).toString();
-        String data3 = LocalDate.now().plusDays(16).toString();;
-        //When && //Then
-        assertThrows(AllNotFoundException.class, () -> controller.getWeather(data1));
-        assertThrows(AllNotFoundException.class, () -> controller.getWeather(data2));
-        assertThrows(AllNotFoundException.class, () -> controller.getWeather(data3));
+    public void testGetWeatherThrowsException() throws Exception {
+        //Given
+        String place = "city=Jastarnia&country=pl&";
+        String date = LocalDate.now().plusDays(2).toString();
+        WeatherDto weatherDto = WeatherDto.builder()
+                .date(date)
+                .name_city("Warszawa")
+                .speed_wind(30)
+                .temperature(15)
+                .build();
+        when(choicePlace.theBestChoicePlace(date)).thenReturn(place);
+        when(weatherService.getAll(date, place))
+                .thenThrow(new AllNotFoundException());
+
+        //When && Then
+        mockMvc.perform(get("/weather/" + date)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(400));
+
     }
 }
