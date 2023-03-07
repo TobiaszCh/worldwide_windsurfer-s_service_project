@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,13 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .build();
         return new InMemoryUserDetailsManager(userDetails);
     }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/weather/**" )
+        httpSecurity.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.GET, "/weather/**" )
                 .hasRole("USER")
                 .and()
-                .formLogin().permitAll();
-
+                .formLogin().permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .csrf()
+                .disable();
     }
-
 }
